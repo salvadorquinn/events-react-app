@@ -7,7 +7,7 @@ function App() {
     <meta charSet="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>StudyNet : Events</title>
-    <link rel="icon" type="image/x-icon" href="public/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
     {/* Fonts */}
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
     <link
@@ -45,13 +45,13 @@ function App() {
     <nav className="navbar navbar-light bg-light">
       <div className="container">
         <a className="navbar-brand" href="index.html">
-          <img src="public/studynet.png" alt="studynet" />
+          <img src="studynet.png" alt="studynet" />
         </a>
       </div>
     </nav>
     <div
       className="cards-background"
-      style={{ backgroundImage: 'url("public/header_back.jpg")' }}
+      style={{ backgroundImage: 'url("header_back.jpg")' }}
     >
       <div className="background-overlay">
         <div className="container content-layer">
@@ -121,7 +121,7 @@ function App() {
         {/* Up coming events 1 */}
         <div className="event-card">
           <img
-            src="public/EventJanBD2025.jpg"
+            src="EventJanBD2025.jpg"
             alt="Australian Higher education roadshow 2025"
           />
           <h2>Australian Higher education roadshow - 2025</h2>
@@ -142,12 +142,12 @@ function App() {
             <br />
             US
           </div>
-          <a href="/pages/bd_event.jsx">View details →</a>
+          <a href="#">View details →</a>
         </div>
         {/* Up coming events 2 */}
         <div className="event-card">
           <img
-            src="public/EventJanBD2025.jpg"
+            src="EventJanBD2025.jpg"
             alt="Australian Higher education roadshow 2025"
           />
           <h2>Australian Higher education roadshow - 2025</h2>
@@ -168,12 +168,12 @@ function App() {
             <br />
             US
           </div>
-          <a href="/pages/bd_event.jsx">View details →</a>
+          <a href="#">View details →</a>
         </div>
         {/* Up coming events 3 */}
         <div className="event-card">
           <img
-            src="public/EventJanBD2025.jpg"
+            src="EventJanBD2025.jpg"
             alt="Australian Higher education roadshow 2025"
           />
           <h2>Australian Higher education roadshow - 2025</h2>
@@ -205,7 +205,7 @@ function App() {
         {/* Previous Events 1 */}
         <div className="event-card">
           <img
-            src="public/EventJanBD2025.jpg"
+            src="EventJanBD2025.jpg"
             alt="Australian Higher education roadshow 2025"
           />
           <h2>Australian Higher education roadshow - 2025</h2>
@@ -231,7 +231,7 @@ function App() {
         {/* Previous Events 2 */}
         <div className="event-card">
           <img
-            src="public/EventJanBD2025.jpg"
+            src="EventJanBD2025.jpg"
             alt="Australian Higher education roadshow 2025"
           />
           <h2>Australian Higher education roadshow - 2025</h2>
@@ -257,7 +257,7 @@ function App() {
         {/* Previous Events 3 */}
         <div className="event-card">
           <img
-            src="public/EventJanBD2025.jpg"
+            src="EventJanBD2025.jpg"
             alt="Australian Higher education roadshow 2025"
           />
           <h2>Australian Higher education roadshow - 2025</h2>
@@ -287,40 +287,40 @@ function App() {
       <div className="slider">
         <div className="slide-track">
           <div className="slide">
-            <img src="public/provider/canberra.png" alt="Harvard" />
+            <img src="provider/canberra.png" alt="Harvard" />
           </div>
           <div className="slide">
-            <img src="public/provider/CQUniversity.png" alt="Harvard" />
+            <img src="provider/CQUniversity.png" alt="Harvard" />
           </div>
           <div className="slide">
-            <img src="public/provider/ECU-1x2.png" alt="Harvard" />
+            <img src="provider/ECU-1x2.png" alt="Harvard" />
           </div>
           <div className="slide">
-            <img src="public/provider/FedU.png" alt="Harvard" />
+            <img src="provider/FedU.png" alt="Harvard" />
           </div>
           <div className="slide">
-            <img src="public/provider/FLINDERS_1x2.png" alt="Harvard" />
+            <img src="provider/FLINDERS_1x2.png" alt="Harvard" />
           </div>
           <div className="slide">
-            <img src="public/provider/latrobe.png" alt="Harvard" />
+            <img src="provider/latrobe.png" alt="Harvard" />
           </div>
           <div className="slide">
-            <img src="public/provider/macquarie-university.png" alt="Harvard" />
+            <img src="provider/macquarie-university.png" alt="Harvard" />
           </div>
           <div className="slide">
-            <img src="public/provider/SCU.png" alt="Harvard" />
+            <img src="provider/SCU.png" alt="Harvard" />
           </div>
           <div className="slide">
-            <img src="public/provider/swinburn-1x2.png" alt="Harvard" />
+            <img src="provider/swinburn-1x2.png" alt="Harvard" />
           </div>
           <div className="slide">
-            <img src="public/provider/uq_logo.png" alt="Harvard" />
+            <img src="provider/uq_logo.png" alt="Harvard" />
           </div>
           <div className="slide">
-            <img src="public/provider/usq-1x2.png" alt="Harvard" />
+            <img src="provider/usq-1x2.png" alt="Harvard" />
           </div>
           <div className="slide">
-            <img src="public/provider/utas-1x2.png" alt="Harvard" />
+            <img src="provider/utas-1x2.png" alt="Harvard" />
           </div>
         </div>
       </div>
@@ -331,7 +331,7 @@ function App() {
         <div className="row">
           <div className="col-sm-4">
             <img
-              src="public/white-logo.png"
+              src="white-logo.png"
               alt="studynet"
               style={{ width: "30%" }}
             />
