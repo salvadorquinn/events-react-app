@@ -11,7 +11,7 @@ const App = () => {
   
   return (
     
-    <BrowserRouter basename="/my-app">
+    <BrowserRouter basename="/events-react-app">
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/BdEvents" element={<BdEvents />} />
