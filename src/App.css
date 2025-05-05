@@ -1,141 +1,45 @@
-.roadmap {
-
-  max-width: 900px;
-  margin: auto;
-}
-
-.roadmap h1 {
-  text-align: center;
-  margin-bottom: 3rem;
-  font-size: 2rem;
-  color: #2a2a2a;
-}
-
-.steps {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.step {
-  background: #ffffff;
-  border-left: 5px solid #9b1f62;
-  padding: 1.5rem 2rem;
-  border-radius: 0.5rem;
-  position: relative;
-  transition: transform 0.3s ease;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-}
-
-.step:hover {
-  transform: translateY(-6px);
-}
-
-.step .number {
-  position: absolute;
-  top: -18px;
-  left: -32px;
-  background: #9b1f62;
-  color: #fff;
-  font-weight: bold;
-  font-size: 1.2rem;
-  padding: 0.5rem 0.8rem;
-  border-radius: 50%;
-}
-
-.step h2 {
-  margin: 0;
-  color: #9b1f62;
-  font-size: 1.3rem;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-.step p {
-  margin: 0;
-  color: #555;
-  font-size: 1rem;
-}
-
-/* Add some nice hover effect for the icons */
-.step i {
-  font-size: 1.4rem;
-}
-
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-  .steps {
-    gap: 1.5rem;
-  }
-
-  .step {
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1.2rem 1.5rem;
-  }
-
-  .step .number {
-    left: 1rem;
-  }
-
-  .step h2 {
-    font-size: 1.2rem;
-  }
-
-  .step p {
-    font-size: 0.95rem;
-  }
-}
-.branches {
-  padding: 40px 20px;
-  text-align: center;
-}
-
-.branches h2 {
-  font-size: 2em;
-  margin-bottom: 30px;
-}
-
-.card1-container {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  max-width: 1400px;
+.events-section-top {
+  padding: 40px 0px 40px 0px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
-.card1 {
-  background: #fff;
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: left;
+.events-section {
+  padding: 20px 0px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.slider {
+  overflow: hidden;
+  max-width: 1400px;
+}
+.slide-track {
+  display: flex;
+  width: calc(250px * 15);
+  animation: scroll 25s linear infinite;
+}
+.slide {
+  width: 250px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+.slide img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
-.card1:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-250px * 5)); } /* Half of total logos to make smooth loop */
 }
 
-.card1 h3 {
-  margin-top: 0;
-  font-size: 1.4em;
-  color: #9b1f62;
-}
 
-.card1 a {
-  color: #9b1f62;
-  text-decoration: none;
-}
 
-.card1 a:hover {
-  text-decoration: underline;
-}
+
 
 .btn-dark {
   color: #fff;
@@ -303,10 +207,8 @@ label {
   }
 }
 
-/** end pagination **/
-/** Home page 1 css **/
 #banner {
-  background-image: url("/public/banner_background.png");
+  background-image: url("banner_background.png");
   background-size: cover;
   background-repeat: no-repeat;
   box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.41);
@@ -836,7 +738,7 @@ label {
   display: flex;
   justify-content: center;
   background-color: #FDFAFC;
-  background: url(/public/map-wrapper.png);
+  background: url(map-wrapper.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -926,7 +828,7 @@ label {
   font-size: 16px;
   margin-bottom: 25px;
   margin-bottom: 1rem;
-  background: url(/public/tick.svg) no-repeat left top;
+  background: url(tick.svg) no-repeat left top;
   padding: 0px 10px 3px 35px;
   list-style: none;
 }
@@ -1550,7 +1452,7 @@ label {
 }
 
 #banner2 {
-  background: url("/public/banner2.png");
+  background: url("banner2.png");
 }
 #banner2 .btn {
   color: #701B64;
@@ -1613,7 +1515,7 @@ label {
   font-size: 16px;
   /* margin-bottom: 25px; */
   margin-bottom: 1rem;
-  background: url(/public/right-circle-arrow.svg) no-repeat 18px 15px;
+  background: url(right-circle-arrow.svg) no-repeat 18px 15px;
   /* padding: 0px 10px 3px 35px; */
   list-style: none;
   background-color: #fff;
@@ -1738,7 +1640,7 @@ label {
   padding: 50px 0 0 50px;
 }
 #start-journey .card-wrapper {
-  background: url(/public/home2-banner.png);
+  background: url(home2-banner.png);
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
@@ -1929,11 +1831,11 @@ label {
   box-shadow: none;
 }
 #faq .faqs .accordion-button::after {
-  background-image: url(/public/expand-plus.svg);
+  background-image: url(expand-plus.svg);
   transition: all 0.5s;
 }
 #faq .faqs .accordion-button:not(.collapsed)::after {
-  background-image: url(/public/expand-minus.svg);
+  background-image: url(expand-minus.svg);
 }
 #faq .faqs .accordion-button::after {
   transition: all 0.5s;
@@ -1963,7 +1865,7 @@ label {
   background-color: #F0F4FE;
 }
 #homepage3 #banner3 {
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.48), rgba(0, 0, 0, 0.48)), url("/public/home-3-banner.png");
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.48), rgba(0, 0, 0, 0.48)), url("home-3-banner.png");
 }
 #homepage3 #banner3 .btn {
   color: #701B64;
@@ -2059,7 +1961,7 @@ label {
   width: 209px;
 }
 #homepage4 #banner4 {
-  background-image: url("/public/banner4.png");
+  background-image: url("banner4.png");
   background-size: cover;
   background-repeat: no-repeat;
   height: 470px;
@@ -2227,7 +2129,7 @@ label {
   font-size: 16px;
   /* margin-bottom: 25px; */
   margin-bottom: 1rem;
-  background: url(/public/right-circle-arrow.svg) no-repeat 18px 15px;
+  background: url(right-circle-arrow.svg) no-repeat 18px 15px;
   /* padding: 0px 10px 3px 35px; */
   list-style: none;
   background-color: #fff;
@@ -2397,7 +2299,7 @@ label {
   }
 }
 #homepage4 #referral-types {
-  background: linear-gradient(0deg, rgba(156, 10, 95, 0.864), rgba(156, 10, 95, 0.864)), url("/public/referral types banner.png");
+  background: linear-gradient(0deg, rgba(156, 10, 95, 0.864), rgba(156, 10, 95, 0.864)), url("referral types banner.png");
 }
 #homepage4 #referral-types .title-section {
   color: #fff;
@@ -2449,7 +2351,7 @@ label {
 #homepage4 #referral-types .card .card-body ul li {
   font-size: 14px;
   margin-bottom: 12px;
-  background: url(/public/Arrow_Forward.svg) no-repeat left 2px;
+  background: url(Arrow_Forward.svg) no-repeat left 2px;
   padding: 0px 10px 0px 35px;
   list-style: none;
 }
@@ -2633,11 +2535,11 @@ label {
   border-radius: 8px 8px 0 0 !important;
 }
 #homepage4 #faq-home-4 .faqs .accordion-button::after {
-  background-image: url(/public/expand-circle-plus.svg);
+  background-image: url(expand-circle-plus.svg);
   transition: all 0.5s;
 }
 #homepage4 #faq-home-4 .faqs .accordion-button:not(.collapsed)::after {
-  background-image: url(/public/expand-circle-minus.svg);
+  background-image: url(expand-circle-minus.svg);
 }
 #homepage4 #faq-home-4 .faqs .accordion-button::after {
   transition: all 0.5s;
@@ -2973,6 +2875,29 @@ content-visibility: hidden;
   font-size: 14px;
   color: #444;
 }
+.slider {
+  overflow: hidden;
+  max-width: 1400px;
+}
+.slide-track {
+  display: flex;
+  width: calc(250px * 15);
+  animation: scroll 25s linear infinite;
+}
+.slide {
+  width: 250px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+.slide img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+/*end slider css*/
 
 .time {
   font-size: 13px;
@@ -2991,89 +2916,6 @@ content-visibility: hidden;
 .event-card a:hover {
   text-decoration: underline;
 }
-
-
-/* .carousel {
-  width: 100%;
-  max-height: 400px;
-  overflow: hidden;
-  position: relative;
-  margin-bottom: 40px;
-}
-
-.slides {
-  display: flex;
-  width: 300%;
-  animation: slide 12s infinite;
-}
-
-.slides img {
-  width: 100%;
-  height: 400px;
-  object-fit: cover;
-}
-
-@keyframes slide {
-  0%   { transform: translateX(0); }
-  33%  { transform: translateX(0); }
-  36%  { transform: translateX(-100%); }
-  66%  { transform: translateX(-100%); }
-  69%  { transform: translateX(-200%); }
-  100% { transform: translateX(-200%); }
-} */
-
-
-/* header section */
-
-/* .header-section {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100vw;               
-  margin: 0;            
-  padding: 0;                 
-  gap: 0;
-  overflow: hidden;
-}
-
-.slider-left,
-.video-right {
-  flex: 1;
-  min-width: 300px;
-  height: 100vh;              
-}
-
-.carousel {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  position: relative;
-}
-
-.slides {
-  display: flex;
-  width: 300%;
-  height: 100%;
-  animation: slide 12s infinite;
-}
-
-.slides img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.video-right iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-} */
-
-
-/* .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 20px;
-} */
 
 .top-section {
   display: flex;
@@ -3166,28 +3008,6 @@ content-visibility: hidden;
   }
 }
 
-
-/* .typing-text {
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: 3px solid #1e1e1e;
-  width: 0;
-  font-size: 20px;
-  animation: typing 3s steps(40, end) forwards, blink 0.7s step-end infinite;
-  margin-bottom: 20px;
-} */
-
-/* Animations */
-/* @keyframes typing {
-  from { width: 0; }
-  to { width: 100%; }
-}
-
-@keyframes blink {
-  50% { border-color: transparent; }
-} */
-
-/* Styling numbers */
 .stats .number1 {
   color: #9B2063;
   font-weight: bold;
@@ -3207,66 +3027,6 @@ content-visibility: hidden;
   -webkit-text-stroke: 0.5px #ffffff;
 }
 
-/* Typing animation fix */
-/*
- .typing-text {
-  font-size: 20px;
-  font-weight: 500;
-  white-space: nowrap;
-  overflow: hidden;
-  border-right: 3px solid #1e1e1e;
-  display: inline-block;
-  width: 0;
-  
-}
-
-.typing-effect{
-  animation: typing 4s steps(40, end) forwards, blink 0.7s step-end infinite;
-}
-
-@keyframes typing {
-  from { width: 0 }
-   to { width: 350px }
-}
-
-@keyframes blink {
-  0%, 100% { border-color: #1e1e1e; }
-  50% { border-color: transparent; }
-}
-*/
-
-
-
-/* events page design start */
-
-
-/* Slider css */
-
-.slider {
-  overflow: hidden;
-  max-width: 1400px;
-  
-  /* border-radius: 10px; */
-  /* box-shadow: 0 4px 20px rgba(0,0,0,0.2); */
-}
-.slide-track {
-  display: flex;
-  width: calc(250px * 15);
-  animation: scroll 25s linear infinite;
-}
-.slide {
-  width: 250px;
-  flex-shrink: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-}
-.slide img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-}
 
 @keyframes scroll {
   0% { transform: translateX(0); }
@@ -3295,24 +3055,3 @@ content-visibility: hidden;
   background: #9b20643b; /* black with 50% opacity */
   z-index: 1;
 }
-
-/* .cards {
-  position: relative;
-  z-index: 2;
-
-} */
-
-/* .background-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5); 
-  z-index: 1;
-}
-
-.content-layer {
-  position: relative;
-  z-index: 2;
-} */
