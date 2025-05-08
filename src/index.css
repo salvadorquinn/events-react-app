@@ -116,3 +116,28 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Top University Animation */
+.text-stroke {
+  -webkit-text-stroke: 0.5px #ffffff;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+
+.marquee:hover {
+  animation-play-state: paused;
+}
+/* END */

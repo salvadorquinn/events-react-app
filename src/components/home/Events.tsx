@@ -1,180 +1,89 @@
-// Events
-import React from 'react';
-import { Link } from 'react-router-dom'
+// Events.tsx
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { supabase } from '../../createClient'; // Adjust the import path as necessary
 
-const ContactSection: React.FC = () => {
-    return (
-    <div>
-            {/* Upcoming Events */}
-    <section className="events-section-top">
-      <h1 className="event_title">Upcoming Events in Australia</h1>
-      <div className="events-container">
-        {/* Up coming events 1 */}
-        <div className="event-card">
-          <img
-            src="EventJanBD2025.jpg"
-            alt="Australian Higher education roadshow 2025"
-          />
-          <h2>Australian Higher education roadshow - 2025</h2>
-          <p>
-            Join us in Houston, TX. Explore our Gazer on display and meet our
-            team.
-          </p>
-          <div className="time">
-            <strong>TIME</strong>
-            <br />
-            Nov 2, 2024 - Nov 16, 2024
-            <br />
-            The Texas Expo Center
-            <br />
-            5085 Westheimer Rd
-            <br />
-            Houston, 77056
-            <br />
-            US
-          </div>
-          <Link to="/BdEvents">View details →</Link>
-        </div>
-        {/* Up coming events 2 */}
-        <div className="event-card">
-          <img
-            src="EventJanBD2025.jpg"
-            alt="Australian Higher education roadshow 2025"
-          />
-          <h2>Australian Higher education roadshow - 2025</h2>
-          <p>
-            Join us in Houston, TX. Explore our Gazer on display and meet our
-            team.
-          </p>
-          <div className="time">
-            <strong>TIME</strong>
-            <br />
-            Nov 2, 2024 - Nov 16, 2024
-            <br />
-            The Texas Expo Center
-            <br />
-            5085 Westheimer Rd
-            <br />
-            Houston, 77056
-            <br />
-            US
-          </div>
-          <Link to="/BdEvents">View details →</Link>
-        </div>
-        {/* Up coming events 3 */}
-        <div className="event-card">
-          <img
-            src="EventJanBD2025.jpg"
-            alt="Australian Higher education roadshow 2025"
-          />
-          <h2>Australian Higher education roadshow - 2025</h2>
-          <p>
-            Join us in Houston, TX. Explore our Gazer on display and meet our
-            team.
-          </p>
-          <div className="time">
-            <strong>TIME</strong>
-            <br />
-            Nov 2, 2024 - Nov 16, 2024
-            <br />
-            The Texas Expo Center
-            <br />
-            5085 Westheimer Rd
-            <br />
-            Houston, 77056
-            <br />
-            US
-          </div>
-          <Link to="/BdEvents">View details →</Link>
-        </div>
-        {/* ... */}
-      </div>
-    </section>
-    <section className="events-section">
-      <h1 className="event_title">Upcoming Events in Bangladesh</h1>
-      <div className="events-container">
-        {/* Previous Events 1 */}
-        <div className="event-card">
-          <img
-            src="EventJanBD2025.jpg"
-            alt="Australian Higher education roadshow 2025"
-          />
-          <h2>Australian Higher education roadshow - 2025</h2>
-          <p>
-            Join us in Houston, TX. Explore our Gazer on display and meet our
-            team.
-          </p>
-          <div className="time">
-            <strong>TIME</strong>
-            <br />
-            Nov 2, 2024 - Nov 16, 2024
-            <br />
-            The Texas Expo Center
-            <br />
-            5085 Westheimer Rd
-            <br />
-            Houston, 77056
-            <br />
-            US
-          </div>
-          <Link to="/BdEvents">View details →</Link>
-        </div>
-        {/* Previous Events 2 */}
-        <div className="event-card">
-          <img
-            src="EventJanBD2025.jpg"
-            alt="Australian Higher education roadshow 2025"
-          />
-          <h2>Australian Higher education roadshow - 2025</h2>
-          <p>
-            Join us in Houston, TX. Explore our Gazer on display and meet our
-            team.
-          </p>
-          <div className="time">
-            <strong>TIME</strong>
-            <br />
-            Nov 2, 2024 - Nov 16, 2024
-            <br />
-            The Texas Expo Center
-            <br />
-            5085 Westheimer Rd
-            <br />
-            Houston, 77056
-            <br />
-            US
-          </div>
-          <Link to="/BdEvents">View details →</Link>
-        </div>
-        {/* Previous Events 3 */}
-        <div className="event-card">
-          <img
-            src="EventJanBD2025.jpg"
-            alt="Australian Higher education roadshow 2025"
-          />
-          <h2>Australian Higher education roadshow - 2025</h2>
-          <p>
-            Join us in Houston, TX. Explore our Gazer on display and meet our
-            team.
-          </p>
-          <div className="time">
-            <strong>TIME</strong>
-            <br />
-            Nov 2, 2024 - Nov 16, 2024
-            <br />
-            The Texas Expo Center
-            <br />
-            5085 Westheimer Rd
-            <br />
-            Houston, 77056
-            <br />
-            US
-          </div>
-          <Link to="/BdEvents">View details →</Link>
-        </div>
-      </div>
-    </section>
-    </div>
-    );
+type EventType = {
+  id: number;
+  image: string;
+  title: string;
+  description: string;
+  date: string;
+  venue: string;
+  address: string;
+  link: string;
+  region: 'australia' | 'bangladesh';
 };
 
-export default ContactSection;
+const Events: React.FC = () => {
+  const [events, setEvents] = useState<EventType[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      const { data, error } = await supabase
+        .from('events') // Your Supabase table name
+        .select('*');
+
+      if (error) {
+        console.error('Error fetching events:', error);
+      } else {
+        setEvents(data as EventType[]);
+      }
+
+      setLoading(false);
+    };
+
+    fetchEvents();
+  }, []);
+
+  const renderEventCard = (event: EventType, keyPrefix: string) => (
+    <div key={`${keyPrefix}-${event.id}`} className="border border-gray-200 p-5 bg-gray-50 hover:shadow-lg transition-shadow">
+      <img src={event.image} alt={event.title} className="w-full h-auto mb-4" />
+      <h2 className="text-lg font-semibold mb-2">{event.title}</h2>
+      <p className="text-sm text-gray-700 mb-4">{event.description}</p>
+      <div className="text-sm text-gray-800 mb-4 whitespace-pre-line">
+        <strong>TIME</strong>
+        <br />
+        {event.date}
+        <br />
+        {event.venue}
+        <br />
+        {event.address}
+      </div>
+      <Link to={event.link} className="text-black-600 hover:underline">
+        View details →
+      </Link>
+    </div>
+  );
+
+  if (loading) {
+    return <div className="text-center py-10">Loading events...</div>;
+  }
+
+  return (
+    <div>
+      {/* Australia Events */}
+      <section className="py-10 max-w-[1200px] mx-auto">
+        <h1 className="text-4xl font-semibold mb-10 text-center leading-snug">
+          Upcoming Events in Australia
+        </h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          {events.filter(e => e.region === 'australia').map(e => renderEventCard(e, 'au'))}
+        </div>
+      </section>
+
+      {/* Bangladesh Events */}
+      <section className="py-6 max-w-[1200px] mx-auto">
+        <h1 className="text-4xl font-semibold mb-10 text-center leading-snug">
+          Upcoming Events in Bangladesh
+        </h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          {events.filter(e => e.region === 'bangladesh').map(e => renderEventCard(e, 'bd'))}
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Events;
