@@ -86,7 +86,7 @@ export default function EventDashboard() {
     setUsersLoading(true);
     const { data, error } = await supabase
       .from("users")
-      .select("id, email, role, name, created_at, last_sign_in");
+      .select("id, email, role, name, created_at, last_sign_in")
     console.log('Fetched users:', data, 'Error:', error);
     if (!error) setUsers(data || []);
     setUsersLoading(false);
