@@ -1,4 +1,5 @@
-// src/types.ts
+export type Role = "super-admin" | "admin" | "marketing-supervisor" | "marketing" | "marketing-intern";
+
 export type Event = {
   id: number;
   title: string;
@@ -7,7 +8,7 @@ export type Event = {
   venue: string;
   address: string;
   description: string;
-  region: string; // Allow 'Australia' | 'Bangladesh' or others
+  region: string;
   image?: string;
   disabled: boolean;
   map_link?: string;
@@ -18,8 +19,9 @@ export type Event = {
 export type User = {
   id: string;
   email: string;
-  role: string;
+  role: Role;
   name?: string;
   created_at?: string;
   last_sign_in?: string;
+  permissions?: { [key: string]: boolean };
 };

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { X } from "lucide-react";
 import { ROLE_PERMISSIONS } from "../../constants";
+import { supabase } from "../../createClient";
 
 type CreateUserModalProps = {
   onClose: () => void;
@@ -15,6 +16,26 @@ export default function CreateUserModal({ onClose, onCreate }: CreateUserModalPr
   const handleCreate = async () => {
     if (!newUserEmail || !newUserRole) return;
     setCreatingUser(true);
+
+    const { data: { user: currentUser } } = await supabase.auth.getUser();
+    const { data: userData, error } = await supabase
+      .from("users")
+      .select("role")
+      .eq("id", currentUser?.id)
+      .single();
+
+    if (error || !userData) {
+      alert("Error checking user role.");
+      setCreatingUser(false);
+      return;
+    }
+
+    if (userData.role !== "super-admin" && newUserRole === "admin") {
+      alert("Only super-admins can create admin users!");
+      setCreatingUser(false);
+      return;
+    }
+
     await onCreate(newUserEmail, newUserRole);
     setCreatingUser(false);
     onClose();

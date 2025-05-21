@@ -1,5 +1,3 @@
-
-// src/pages/EventBackend/EventDashboard.tsx
 import { useEffect, useState } from "react";
 import { supabase } from "../../createClient";
 import { useNavigate } from "react-router-dom";
@@ -10,14 +8,14 @@ import UserManagementModal from "../../components/modal/UserManagementModal";
 import CreateUserModal from "../../components/modal/CreateUserModal";
 import UserDetailsModal from "../../components/modal/UserDetailsModal";
 import { ROLE_PERMISSIONS } from "../../constants";
-import { User, Event } from "../../types";
+import { User, Event, Role } from "../../types";
 
 export default function EventDashboard() {
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [checkingAuth, setCheckingAuth] = useState(true);
-  const [role, setRole] = useState<string | null>(null);
+  const [role, setRole] = useState<Role | null>(null); // Changed from string | null
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [showUserModal, setShowUserModal] = useState(false);
   const [showCreateUserModal, setShowCreateUserModal] = useState(false);
@@ -28,8 +26,8 @@ export default function EventDashboard() {
   const [disableLoading, setDisableLoading] = useState<number | null>(null);
 
   const navigate = useNavigate();
-  const isAdmin = role === "admin";
-  const canModify = role === "admin" || role === "marketing";
+  const isAdmin = role === "admin" || role === "super-admin";
+  const canModify = role === "admin" || role === "marketing" || role === "super-admin";
   const permissions = role ? ROLE_PERMISSIONS[role as keyof typeof ROLE_PERMISSIONS] : null;
 
   useEffect(() => {
@@ -43,7 +41,7 @@ export default function EventDashboard() {
       const user = session.user;
       const { data, error } = await supabase
         .from("users")
-        .select("id, email, role, name")
+        .select("id, email, role, name, permissions")
         .eq("id", user.id)
         .single();
 
@@ -53,7 +51,7 @@ export default function EventDashboard() {
         return;
       }
 
-      setRole(data.role);
+      setRole(data.role as Role); // Cast to Role, assuming data.role is valid
       setCurrentUser(data);
       fetchEvents();
       setCheckingAuth(false);
@@ -86,9 +84,22 @@ export default function EventDashboard() {
     setUsersLoading(true);
     const { data, error } = await supabase
       .from("users")
-      .select("id, email, role, name, created_at, last_sign_in")
+      .select("id, email, role, name, created_at, last_sign_in, permissions");
+    
     console.log('Fetched users:', data, 'Error:', error);
-    if (!error) setUsers(data || []);
+    if (!error && data) {
+      const validRoles: Role[] = ["super-admin", "admin", "marketing-supervisor", "marketing", "marketing-intern"];
+      const validatedUsers: User[] = data
+        .filter((user: any) => validRoles.includes(user.role))
+        .map((user: any) => ({
+          ...user,
+          role: user.role as Role,
+        }));
+      setUsers(validatedUsers);
+    } else {
+      console.error('Error fetching users:', error);
+      setUsers([]);
+    }
     setUsersLoading(false);
   };
 
@@ -135,18 +146,28 @@ export default function EventDashboard() {
   };
 
   const handleUpdateRole = async (userId: string, newRole: string) => {
+    if (currentUser?.role !== "super-admin") {
+      alert("Only super-admins can change user roles!");
+      return;
+    }
     const { error } = await supabase.from("users").update({ role: newRole }).eq("id", userId);
     if (!error) {
-      setUsers(users.map(u => u.id === userId ? { ...u, role: newRole } : u));
+      setUsers(users.map(u => u.id === userId ? { ...u, role: newRole as Role } : u));
       if (currentUser?.id === userId) {
-        setRole(newRole);
-        setCurrentUser(prev => prev ? { ...prev, role: newRole } : null);
+        setRole(newRole as Role); // Cast to Role
+        setCurrentUser(prev => prev ? { ...prev, role: newRole as Role } : null);
       }
+    } else {
+      alert("Failed to update role. Please try again.");
     }
   };
 
   const handleDeleteUser = async (userId: string) => {
     if (!confirm("Are you sure you want to delete this user? This action cannot be undone.")) return;
+    if (currentUser?.role !== "super-admin" && users.find(u => u.id === userId)?.role === "admin") {
+      alert("Only super-admins can delete admins!");
+      return;
+    }
     const { error: userDeleteError } = await supabase.from("users").delete().eq("id", userId);
     if (userDeleteError) return;
     const { error: authDeleteError } = await supabase.auth.admin.deleteUser(userId);
@@ -162,6 +183,10 @@ export default function EventDashboard() {
   };
 
   const handleCreateUser = async (email: string, role: string) => {
+    if (currentUser?.role !== "super-admin" && role === "admin") {
+      alert("Only super-admins can create admin users!");
+      return;
+    }
     const { data, error } = await supabase.auth.admin.createUser({ email, email_confirm: true });
     if (error || !data?.user) return;
     const { error: roleError } = await supabase
@@ -228,7 +253,7 @@ export default function EventDashboard() {
       <div className="max-w-7xl mx-auto">
         <EventHeader
           currentUser={currentUser!}
-          role={role!}
+          role={role!} // Now typed as Role
           onAddEvent={() => navigate("/Admin/events/new")}
           onManageUsers={() => { fetchUsers(); setShowUserModal(true); }}
           onCreateUser={() => setShowCreateUserModal(true)}

@@ -1,5 +1,16 @@
-// src/constants.ts
 export const ROLE_PERMISSIONS = {
+  "super-admin": {
+    label: "Super Admin",
+    color: "bg-purple-600",
+    description: "Full access to all features, including managing admins and permissions",
+    canCreateEvents: true,
+    canEditEvents: true,
+    canDeleteEvents: true,
+    canManageUsers: true,
+    canViewAnalytics: true,
+    canManageAdmins: true,
+    canEditPermissions: true,
+  },
   "admin": {
     label: "Admin",
     color: "bg-red-500",
@@ -9,6 +20,8 @@ export const ROLE_PERMISSIONS = {
     canDeleteEvents: true,
     canManageUsers: true,
     canViewAnalytics: true,
+    canManageAdmins: false,
+    canEditPermissions: false,
   },
   "marketing-supervisor": {
     label: "Marketing Supervisor",
@@ -19,6 +32,8 @@ export const ROLE_PERMISSIONS = {
     canDeleteEvents: false,
     canManageUsers: false,
     canViewAnalytics: true,
+    canManageAdmins: false,
+    canEditPermissions: false,
   },
   "marketing": {
     label: "Marketing",
@@ -29,6 +44,8 @@ export const ROLE_PERMISSIONS = {
     canDeleteEvents: false,
     canManageUsers: false,
     canViewAnalytics: false,
+    canManageAdmins: false,
+    canEditPermissions: false,
   },
   "marketing-intern": {
     label: "Marketing Intern",
@@ -39,5 +56,7 @@ export const ROLE_PERMISSIONS = {
     canDeleteEvents: false,
     canManageUsers: false,
     canViewAnalytics: false,
+    canManageAdmins: false,
+    canEditPermissions: false,
   }
 };
