@@ -1,12 +1,10 @@
 interface LoadingSpinnerProps {
   size?: 'sm' | 'md' | 'lg';
-  color?: string;
   className?: string;
 }
 
 export default function LoadingSpinner({ 
   size = 'md', 
-  color = 'currentColor',
   className = ''
 }: LoadingSpinnerProps) {
   const sizeMap = {
@@ -15,7 +13,8 @@ export default function LoadingSpinner({
     lg: 'w-8 h-8'
   };
 
-  return (    <div className={`inline-block ${className}`} role="status" aria-label="Loading">
+  return (
+    <div className={`inline-block text-white ${className}`} role="status" aria-label="Loading">
       <svg
         className={`animate-spin ${sizeMap[size]}`}
         xmlns="http://www.w3.org/2000/svg"
@@ -23,30 +22,21 @@ export default function LoadingSpinner({
         viewBox="0 0 24 24"
       >
         <circle
-          className="opacity-20"
+          className="opacity-25"
           cx="12"
           cy="12"
           r="10"
-          stroke={color}
-          strokeWidth="2"
+          stroke="currentColor"
+          strokeWidth="4"
+          fill="none"
         />
-        <circle
+        <path
           className="opacity-75"
-          cx="12"
-          cy="12"
-          r="10"
-          stroke="url(#loading-gradient)"
-          strokeWidth="2"
-          strokeDasharray="20 50"
+          fill="currentColor"
+          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
         />
-        <defs>
-          <linearGradient id="loading-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#9b1f62" />
-            <stop offset="100%" stopColor="#682161" />
-          </linearGradient>
-        </defs>
       </svg>
       <span className="sr-only">Loading...</span>
     </div>
   );
-} 
+}
