@@ -3,6 +3,7 @@ import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { supabase } from "../../createClient";
 import { notify } from "../../utils/notifications";
 import { logger } from '../../utils/logger';
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 
 type Venue = {
   id: number;
@@ -646,8 +647,7 @@ export default function EventForm() {
             </div>
 
             {/* Form Actions */}
-            <div className="flex justify-between items-center pt-4 sm:pt-6">
-              <button
+            <div className="flex justify-between items-center pt-4 sm:pt-6">              <button
                 type="button"
                 onClick={handleCancel}
                 className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg bg-white/10 text-white text-sm sm:text-base hover:bg-white/20 transition-colors duration-200"
@@ -656,27 +656,18 @@ export default function EventForm() {
               </button>
               <button
                 type="submit"
-                disabled={saving}
-                className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-lg bg-gradient-to-r from-[#9b1f62] to-[#682161] text-white text-sm sm:text-base font-medium shadow-lg hover:opacity-90 transition-all duration-200 ${
+                disabled={saving}                className={`min-w-[120px] px-4 sm:px-6 py-2 sm:py-2.5 rounded-lg bg-gradient-to-r from-[#9b1f62] to-[#682161] text-white text-sm sm:text-base font-medium shadow-lg hover:opacity-90 transition-all duration-200 ${
                   saving ? 'opacity-70 cursor-not-allowed' : ''
                 }`}
-              >                {saving ? (
-                  <span className="flex items-center gap-2">
-                    <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
-                      <circle className="opacity-20" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none" />
-                      <circle className="opacity-0" cx="12" cy="12" r="10" stroke="url(#spinner-gradient)" strokeWidth="2" strokeDasharray="20 50" fill="none" />
-                      <defs>
-                        <linearGradient id="spinner-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stopColor="#9b1f62" />
-                          <stop offset="100%" stopColor="#682161" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                    {isEditMode ? "Saving..." : "Creating..."}
-                  </span>
-                ) : (
-                  isEditMode ? "Save Changes" : "Create Event"
-                )}
+              >
+                <div className="flex items-center justify-center gap-2">
+                  {saving && (
+                    <div className="w-4 h-4">
+                      <LoadingSpinner size="sm" />
+                    </div>
+                  )}
+                  <span>{saving ? (isEditMode ? "Saving..." : "Creating...") : (isEditMode ? "Save Changes" : "Create Event")}</span>
+                </div>
               </button>
             </div>
           </form>
